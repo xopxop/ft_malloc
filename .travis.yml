@@ -7,5 +7,16 @@ install:
   - bundle
   - cd ..
 
+before scrip:
+  - if [[ $(norminette . | grep "Error" | wc -l) ]];
+  - then
+  - false
+  - else
+  - true
+  - fi
+  # - norminette/norminette.rb . > norm.txt
+  # - grep "Error" norm.txt | wc -l > norm.txt
+  # - test norminette/norminette.rb . | grep "Error" | wc -l
+
 script:
-  - norminette/norminette.rb .
+  - 
