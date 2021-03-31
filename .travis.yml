@@ -8,6 +8,6 @@ before-script:
   - git clone https://github.com/hivehelsinki/norminette-client.git ~/.norminette/
   - cd ~/.norminette/
   - bundle
-  - echo 'alias norminette="~/.norminette/norminette.rb"' >> ~/.zshrc source ~/.zshrc
+  - alias norminette="~/.norminette/norminette.rb"
   - alias
   - norminette .
