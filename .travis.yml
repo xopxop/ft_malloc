@@ -12,4 +12,4 @@ install:
   # - test norminette/norminette.rb . | grep "Error" | wc -l
 
 script:
-  - if [[ $(norminette/norminette.rb . | grep “Error”) ]]; then false; else true; fi
+  - if [[ $(norminette/norminette.rb . | grep 'Error') ]]; then false; else true; fi
