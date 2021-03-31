@@ -9,4 +9,6 @@ before-script:
   - cd norminette
   - bundle
   - cd ..
-  - norminette/norminette.rb .
+
+script:
+  - docker-compose run app sh -c "norminette/norminette.rb ."
