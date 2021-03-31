@@ -8,8 +8,7 @@ install:
   - cd ..
 
 before scrip:
-  - if [[ $(norminette . | grep "Error" | wc -l) ]];
-  - then
+  - if [[ $(norminette . | grep "Error" | wc -l) ]]; then
   - false
   - else
   - true
