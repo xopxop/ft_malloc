@@ -5,7 +5,8 @@ services:
 before-script:
   - pip install docker-compose
   - sudo apt-get install ruby ruby-bundler ruby-dev build-essential
-  - git clone https://github.com/hivehelsinki/norminette-client.git ~/.norminette/
-  - cd ~/.norminette/
+  - git clone https://github.com/hivehelsinki/norminette-client.git norminette
+  - cd norminette
   - bundle
-  - ~/.norminette/norminette.rb .
+  - cd ..
+  - norminette/norminette.rb .
