@@ -1,9 +1,7 @@
 language: c
-services:
-  -docker
 
 before-script:
-  - apt-get install ruby ruby-bundler ruby-dev build-essential
+  - sudo apt-get install ruby ruby-bundler ruby-dev build-essential
   - git clone https://github.com/hivehelsinki/norminette-client.git norminette
   - cd norminette
   - bundle
