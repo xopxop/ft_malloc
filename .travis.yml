@@ -9,4 +9,4 @@ before-script:
   - cd ~/.norminette/
   - bundle
   - echo 'alias norminette="~/.norminette/norminette.rb"' >> ~/.zshrc source ~/.zshrc
-  - ./norminette .
+  - norminette .
