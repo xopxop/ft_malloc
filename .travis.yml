@@ -8,4 +8,4 @@ before-script:
   - git clone https://github.com/hivehelsinki/norminette-client.git ~/.norminette/
   - cd ~/.norminette/
   - bundle
-  - norminette="~/.norminette/norminette.rb
+  - ~/.norminette/norminette.rb .
