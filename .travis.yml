@@ -1,3 +1,10 @@
 language: c
-script: sudo apt-get install ruby ruby-bundler ruby-dev build-essential && git clone https://github.com/hivehelsinki/norminette-client.git ~/.norminette/
-script: cd ~/.norminette/ && bundle && echo 'alias norminette="~/.norminette/norminette.rb"' >> ~/.zshrc source ~/.zshrc
+services:
+  -docker
+
+before-script:
+  - sudo apt-get install ruby ruby-bundler ruby-dev build-essential
+  - git clone https://github.com/hivehelsinki/norminette-client.git ~/.norminette/
+  - cd ~/.norminette/
+  - bundle
+  - echo 'alias norminette="~/.norminette/norminette.rb"' >> ~/.zshrc source ~/.zshrc
