@@ -8,6 +8,4 @@ before-script:
   - git clone https://github.com/hivehelsinki/norminette-client.git ~/.norminette/
   - cd ~/.norminette/
   - bundle
-  - alias norminette="~/.norminette/norminette.rb"
-  - alias
-  - norminette .
+  - norminette="~/.norminette/norminette.rb
