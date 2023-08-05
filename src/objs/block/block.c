@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 04:03:31 by dthan             #+#    #+#             */
-/*   Updated: 2023/07/22 03:20:27 by dthan            ###   ########.fr       */
+/*   Updated: 2023/08/05 15:22:38 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ t_block *new_block_obj(size_t size, size_t chunk_count)
 	return new_block;
 }
 
-void blocks_add(t_block **blocks, t_block *new_block)
+void blocks_add(t_block **blocks_list, t_block *new_block)
 {
   t_block *block;
 
-  if (*blocks == NULL)
-    *blocks = new_block;
+  if (*blocks_list == NULL)
+    *blocks_list = new_block;
   else
   {
-    block = *blocks;
+    block = *blocks_list;
     while (block->next)
       block = block->next;
     block->next = new_block;
