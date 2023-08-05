@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 02:45:39 by dthan             #+#    #+#             */
-/*   Updated: 2023/07/07 02:01:26 by dthan            ###   ########.fr       */
+/*   Updated: 2023/07/08 14:22:40 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_undefined_zone
 {
 	struct s_block *blocks;
 	size_t total_used_size;
+	size_t max_asking_bytes;
 } t_undefined_zone;
 
 t_defined_zone *new_defined_zone_obj(int pages_per_block);

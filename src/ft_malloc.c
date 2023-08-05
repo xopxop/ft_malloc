@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 00:37:32 by dthan             #+#    #+#             */
-/*   Updated: 2023/06/17 16:46:52 by dthan            ###   ########.fr       */
+/*   Updated: 2023/07/16 00:47:47 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ void *ft_malloc(size_t size)
 
 	if (g_malloc_heap == NULL)
 		g_malloc_heap = new_heap_obj();
-	memory = heap_get_memory(g_malloc_heap, size);
-	return memory;
+	return heap_get_memory(g_malloc_heap, size);
 }
 
 void show_alloc_mem()

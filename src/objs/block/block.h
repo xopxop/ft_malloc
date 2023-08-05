@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 04:03:28 by dthan             #+#    #+#             */
-/*   Updated: 2023/07/07 01:57:20 by dthan            ###   ########.fr       */
+/*   Updated: 2023/07/09 19:57:45 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_block
   size_t max_asking_bytes;
   size_t max_bytes;
   size_t chunk_count;
+  size_t chunk_available_count;
   struct s_block *next;
 } t_block;
 

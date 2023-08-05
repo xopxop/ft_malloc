@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 01:29:31 by dthan             #+#    #+#             */
-/*   Updated: 2023/07/07 01:50:37 by dthan            ###   ########.fr       */
+/*   Updated: 2023/07/09 19:55:02 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,14 @@ void heap_show_memory(t_heap *heap)
 }
 */
 
-void *heap_get_memory(t_heap *heap, size_t size)
+void *heap_get_memory(t_heap *heap, size_t bytes)
 {
-	void *memory = NULL;
-
-	// error handling
-	if (size <= heap->tiny->max_asking_bytes)
-	{
-		memory = defined_zone_get_memory(heap->tiny);
-		if (memory != NULL) {
-			// extend
-		}
-	}
-	else if (size <= heap->small->max_asking_bytes)
-	{
-		memory = defined_zone_get_memory(heap->tiny);
-		if (memory != NULL) {
-			// extend
-		}
-	}
+	if (bytes <= 0)
+		return NULL;
+	else if (bytes <= heap->tiny->max_asking_bytes)
+		return defined_zone_get_memory(heap->tiny, bytes);
+	else if (bytes <= heap->small->max_asking_bytes)
+		return defined_zone_get_memory(heap->tiny, bytes);
 	else
-		memory = undefined_zone_get_memory(heap->large);
-	return memory;
+		return undefined_zone_get_memory(heap->large, bytes);
 }

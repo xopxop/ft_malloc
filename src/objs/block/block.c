@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 04:03:31 by dthan             #+#    #+#             */
-/*   Updated: 2023/07/07 02:29:41 by dthan            ###   ########.fr       */
+/*   Updated: 2023/07/22 03:20:27 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,13 @@ void blocks_print(t_block *blocks)
 void *blocks_get_memory(t_block *blocks, size_t size)
 {
   t_block *block = blocks;
-  void *memory = NULL;
 
   while (block) {
-    if (block->available_chunks > block->occupied_chunks) {
-      memory = block_get_memory(block, size);
-    }
+    if (block->chunk_available_count)
+      return block_get_memory(block, size);
     block = block->next;
   }
-  block = new_block_obj(blocks->max_bytes, block->chunk_count)
+  block = new_block_obj(blocks->max_bytes, block->chunk_count);
   blocks_add(blocks, block);
   return block_get_memory(block, size);
 }
@@ -127,7 +125,8 @@ void *block_get_memory(t_block *block, size_t size) {
     else
       chunk = (t_chunk*)((void*)(chunk + 1) + block->max_asking_bytes);
     if (chunk->available)
-      return chunk_get_memory(chunk, size);
+      break;
   }
-  return NULL;
+  block->chunk_available_count--;
+  return chunk_get_memory(chunk, size);
 }
