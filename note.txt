@@ -1,7 +1,0 @@
-mmap function can allocate memory from different sources depending on the usage
-scenario. When using mmap with the MAP_ANONYMOUS flag, it allocates memory directly
-from RAM. When using mmap with the MAP_FILE flag, it maps a file into memory, 
-involving a combination of RAM and disk
-
-
-page table -> page -> down to mapped memory address
