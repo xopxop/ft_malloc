@@ -30,9 +30,13 @@ void *ft_malloc(size_t size)
 {
 	void *memory = NULL;
 
-	if (g_malloc_heap == NULL)
-		g_malloc_heap = new_heap_obj();
-	return heap_get_memory(g_malloc_heap, size);
+ if (size <= 512)
+	 memory = get_memory(g_heap.tiny, size);
+	else if (size <= 4019)
+	 memory = get_memory(g_heap.small, size);
+	else
+	 memory = get_memory(g_heap.large, size);
+	return memory;
 }
 
 void show_alloc_mem()
