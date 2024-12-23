@@ -17,6 +17,7 @@ typedef struct s_chunk
 {
   int available;
 	size_t size;
+  struct s_chunk *next;
 }	t_chunk;
 
 t_chunk *new_chunk(void *address);
