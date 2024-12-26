@@ -15,12 +15,15 @@
 
 // free_block
 
-t_block *new_block_obj(size_t size, size_t chunk_count)
+t_block *new_block_obj(size_t chunk_count)
 {
+
   t_block *new_block;
   t_chunk *chunk = NULL;
   void *address;
+  int size;
 
+  size = getpagesize();
 	new_block = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1 ,0);
 	new_block->total_used_bytes = 0;
   new_block->chunk_count = chunk_count;

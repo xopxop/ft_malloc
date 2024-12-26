@@ -12,8 +12,26 @@
 
 #ifndef FT_MALLOC_H
 #define FT_MALLOC_H
-#include "./objs/heap/heap.h"
 
-t_heap *g_malloc_heap;
+typedef struct s_block
+{
+    
+}
+
+typedef struct s_zone
+{
+    static size_t pages_count;
+    size_t size;
+    t_block *blocks;
+}   t_zone;
+
+typedef struct s_heap
+{
+    t_zone tiny;
+    t_zone small;
+    t_zone large;
+}   t_heap;
+
+t_heap g_malloc_heap;
 
 #endif

@@ -17,6 +17,26 @@
 
 // heap -> zone -> block -> chunk
 
+
+t_block *new_block_obj(size_t max_bytes, size_t chunk_count)
+{
+  t_block *block;
+  void *address;
+
+  address = mmap(0, max_bytes, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1 ,0);
+  block = address;
+  block->max_bytes = max_bytes;
+  block->chunk_count = chunk_count;
+  block->chunk_available_count = chunk_count;
+  block->next = NULL;
+  block->chunks = address + sizeof(t_block);
+  for (size_t i = 0; i < chunk_count; i++)
+    block->chunks[i] = new_chunk_obj(address + sizeof(t_block) + sizeof(t_chunk) * i);
+  return block;
+}
+
+
+
 t_static_zone *new_defined_zone_obj(int pages_per_block)
 {
   t_static_zone *zone;
