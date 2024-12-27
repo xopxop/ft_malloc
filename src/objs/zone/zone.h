@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc.h                                           :+:      :+:    :+:   */
+/*   zone.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/01 22:08:05 by dthan             #+#    #+#             */
-/*   Updated: 2021/04/01 23:10:00 by dthan            ###   ########.fr       */
+/*   Created: 2024/12/26 12:11:15 by du.than           #+#    #+#             */
+/*   Updated: 2024/12/26 12:24:56 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MALLOC_H
-# define MALLOC_H
+#ifndef ZONE_H
+#define ZONE_H
+#include "../block/block.h"
 
-#include <malloc.h>
+typedef struct s_zone
+{
+	size_t size;
+	struct s_block *blocks;
+}	t_zone;
 
-# endif
+#endif

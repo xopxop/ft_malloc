@@ -6,130 +6,43 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 04:03:31 by dthan             #+#    #+#             */
-/*   Updated: 2023/08/05 15:22:38 by dthan            ###   ########.fr       */
+/*   Updated: 2024/12/26 14:56:14 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/mman.h>
 #include "block.h"
 
-// free_block
-
-t_block *new_block_obj(size_t chunk_count)
+t_block *new_block(size_t size)
 {
+	void *block_base;
+	t_block *block;
+	t_chunk *initial_chunk;
 
-  t_block *new_block;
-  t_chunk *chunk = NULL;
-  void *address;
-  int size;
-
-  size = getpagesize();
-	new_block = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1 ,0);
-	new_block->total_used_bytes = 0;
-  new_block->chunk_count = chunk_count;
-  new_block->max_bytes = size;
-  new_block->max_asking_bytes = ((size - sizeof(t_block)) / chunk_count) - sizeof(t_chunk);
-  new_block->next = NULL;
-  while (--chunk_count >= 0) {
-    if (chunk == NULL)
-      address = new_block + 1;
-    else
-      address = (t_chunk*)((void*)(chunk + 1) + new_block->max_asking_bytes);
-    chunk = new_chunk(address);
-  }
-	return new_block;
+	size = (size + PAGE_SIZE - 1) & ~(PAGE_SIZE - 1);
+	block_base = mmap(0, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+	if (block_base == MAP_FAILED) return NULL;
+	block = (t_block*)block_base;
+	block->size = size - BLOCK_META_SIZE;
+	block->chunks = (char*)block_base + BLOCK_META_SIZE;
+	block->next = NULL;
+	initial_chunk = block->chunks;
+	initial_chunk->size = block->size - CHUNK_META_SIZE;
+	initial_chunk->free = 1;
+	initial_chunk->next = NULL;
+	return block;
 }
 
-void blocks_add(t_block **blocks_list, t_block *new_block)
+t_chunk *block_find_free_chunk(t_block *block, size_t size)
 {
-  t_block *block;
+	t_chunk *chunk;
 
-  if (*blocks_list == NULL)
-    *blocks_list = new_block;
-  else
-  {
-    block = *blocks_list;
-    while (block->next)
-      block = block->next;
-    block->next = new_block;
-  }
-}
-
-/*
-
-t_block *blocks_remove(t_block **blocks, t_block *remove_block)
-{
-  t_block *block;
-
-  block = *blocks;
-  while (block)
-  {
-    if (block == remove_block)
-    {
-      *blocks = NULL;
-      break ;
-    }
-    else if (block->next == remove_block)
-    {
-      block->next = remove_block->next;
-      remove_block->next = NULL;
-      break ;
-    }
-    block = block->next;
-  }
-  return remove_block;
-}
-
-t_block *blocks_find(void *data)
-{
-  return (t_block*)data - 1;
-}
-*/
-
-/*
-
-#include <stdio.h>
-
-void blocks_print(t_block *blocks)
-{
-  t_block *block;
-
-  block = blocks;
-  while (block)
-  {
-    printf("%p - %p : %d bytes\n", (void*)(block + 1), (void*)((block + 1) + block->size));
-    block = block->next;
-  }
-}
-
-*/
-
-void *blocks_get_memory(t_block *blocks, size_t size)
-{
-  t_block *block = blocks;
-
-  while (block) {
-    if (block->chunk_available_count)
-      return block_get_memory(block, size);
-    block = block->next;
-  }
-  block = new_block_obj(blocks->max_bytes, block->chunk_count);
-  blocks_add(blocks, block);
-  return block_get_memory(block, size);
-}
-
-void *block_get_memory(t_block *block, size_t size) {
-  t_chunk *chunk = NULL;
-  size_t chunk_count = block->chunk_count;
-
-  while (chunk_count--) {
-    if (chunk == NULL)
-      chunk = block + 1;
-    else
-      chunk = (t_chunk*)((void*)(chunk + 1) + block->max_asking_bytes);
-    if (chunk->available)
-      break;
-  }
-  block->chunk_available_count--;
-  return chunk_get_memory(chunk, size);
+	chunk = block->chunks;
+	while (chunk)
+	{
+		if (chunk->free && chunk->size >= size)
+			return chunk;
+		chunk = chunk->next;
+	}
+	return NULL;
 }

@@ -6,21 +6,19 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 20:09:30 by dthan             #+#    #+#             */
-/*   Updated: 2023/07/22 03:23:35 by dthan            ###   ########.fr       */
+/*   Updated: 2024/12/26 14:40:15 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHUNK_H
 #define CHUNK_H
+#define CHUNK_META_SIZE sizeof(t_chunk)
 
 typedef struct s_chunk
 {
-  int available;
-	size_t size;
-  struct s_chunk *next;
+	size_t	size;
+	int		free;
+	struct s_chunk	*next;
 }	t_chunk;
-
-t_chunk *new_chunk(void *address);
-void *chunk_get_memory(t_chunk *chunk, size_t size);
 
 #endif
