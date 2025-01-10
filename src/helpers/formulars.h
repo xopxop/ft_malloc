@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chunk.h                                            :+:      :+:    :+:   */
+/*   formulars.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/01 20:09:30 by dthan             #+#    #+#             */
-/*   Updated: 2024/12/27 16:49:26 by dthan            ###   ########.fr       */
+/*   Created: 2024/12/27 10:38:28 by dthan             #+#    #+#             */
+/*   Updated: 2024/12/27 10:38:54 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHUNK_H
-#define CHUNK_H
-#define CHUNK_META_SIZE sizeof(t_chunk)
+#ifndef FORMULARS_H
+#define FORMULARS_H
 
-typedef struct s_chunk
-{
-	size_t	size;
-	int		free;
-	struct s_chunk	*next;
-}	t_chunk;
+size_t align_data_size(size_t size, size_t alignment);
 
 #endif

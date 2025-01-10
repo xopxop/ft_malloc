@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 18:43:10 by dthan             #+#    #+#             */
-/*   Updated: 2024/12/26 12:40:17 by dthan            ###   ########.fr       */
+/*   Updated: 2024/12/27 16:22:15 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,22 @@ typedef struct s_heap
     t_zone large;
 }   t_heap;
 
-t_heap g_malloc_heap;
+static t_heap g_heap = {
+    .tiny = {
+        .total_size = 0,
+        .used_size = 0,
+        .blocks = NULL
+    },
+    .small = {
+        .total_size = 0,
+        .used_size = 0,
+        .blocks = NULL
+    },
+    .large = {
+        .total_size = 0,
+        .used_size = 0,
+        .blocks = NULL
+    }
+};
 
 #endif
