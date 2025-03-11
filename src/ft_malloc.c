@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 00:37:32 by dthan             #+#    #+#             */
-/*   Updated: 2024/12/27 15:31:49 by dthan            ###   ########.fr       */
+/*   Updated: 2025/01/10 14:25:54 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,13 @@ void	*ft_malloc(size_t size)
 	size_t	alignment;
 
 	zone = select_zone(size);
-	if (!zone)
-		return NULL;
+	if (!zone) return NULL;
 	size = align_size(size, alignment(zone));
 	chunk = zone_find_free_chunk(zone, size);
 	if (!chunk)
 	{
 		block = zone_create_new_block(zone, size);
-		if (!block)
-			return NULL;
+		if (!block) return NULL;
 		chunk = block_find_free_chunk(block, size);
 	}
 	chunk_split(chunk, size);
