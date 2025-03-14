@@ -11,10 +11,17 @@ OBJ_DIR := obj
 SRC_DIR := src
 
 # Source files
-SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
+SRC_FILES += $(SRC_DIR)/ft_malloc.c
+SRC_FILES += $(SRC_DIR)/objs/zone/zone.c
+SRC_FILES += $(SRC_DIR)/objs/block/block.c
+SRC_FILES += $(SRC_DIR)/objs/chunk/chunk.c
+SRC_FILES += $(SRC_DIR)/helpers/formulars.c
+
+# Object files
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
 all: $(TARGET)
+	@echo $(OBJ_FILES)
 	@echo "✅ Build completed!"
 
 # Build target
@@ -27,7 +34,7 @@ mkdir:
 
 # Compilation rule
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | mkdir
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $(OBJ_DIR)/$(notdir $@)
 
 # Clean up
 clean:

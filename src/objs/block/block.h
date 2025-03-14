@@ -6,21 +6,27 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 04:03:28 by dthan             #+#    #+#             */
-/*   Updated: 2024/12/27 16:46:49 by dthan            ###   ########.fr       */
+/*   Updated: 2025/03/13 15:25:15 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BLOCK_H
 #define BLOCK_H
-#define BLOCK_META_SIZE sizeof(t_block)
 #include "../chunk/chunk.h"
+
+typedef struct s_block_meta_data
+{
+	size_t	total_data_size;
+	size_t	available_data_size;
+}	t_block_meta_data;
 
 typedef struct s_block
 {
-	size_t			total_bytes;
-	size_t 			free_bytes;
-	t_chunk			*chunks;
-	struct s_block	*next;
+	t_block_meta_data	meta_data;
+	struct s_block		*next;
 }	t_block;
+
+t_block *new_block(size_t size);
+t_chunk *block_find_free_chunk(t_block *block, size_t size);
 
 #endif
