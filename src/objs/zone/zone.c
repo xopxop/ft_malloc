@@ -6,11 +6,12 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 12:53:06 by dthan             #+#    #+#             */
-/*   Updated: 2025/03/17 11:11:34 by dthan            ###   ########.fr       */
+/*   Updated: 2025/03/17 14:30:40 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "zone.h"
+#include <stdio.h>
 
 t_chunk	*zone_find_free_chunk(t_zone *zone, size_t size)
 {
@@ -20,9 +21,12 @@ t_chunk	*zone_find_free_chunk(t_zone *zone, size_t size)
 	block = zone->blocks;
 	while (block)
 	{
+		printf("BLOCK: address of block: %p\n", block);
 		chunk = block_find_free_chunk(block, size);
-		if (chunk)
+		printf("RETURNED CHUNK: address of chunk: %p\n", (void*)chunk);
+		if (chunk) {
 			return (chunk);
+		}
 		block = block->next;
 	}
 	return (NULL);

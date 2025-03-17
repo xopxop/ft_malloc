@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esalorin <esalorin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 00:37:32 by dthan             #+#    #+#             */
-/*   Updated: 2025/03/17 07:52:21 by esalorin         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:41:43 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	*ft_malloc(size_t size)
 	chunk = zone_find_free_chunk(zone, size);
 	if (!chunk)
 	{
-		printf("here\n");
 		block = zone_extend_new_block(zone, size);
 		if (!block) return (NULL);
 		chunk = block_find_free_chunk(block, size);
@@ -48,6 +47,7 @@ void	*ft_malloc(size_t size)
 	if (chunk->meta_data.data_size > size + aligned_chunk_data_size())
 		chunk_split(chunk, size);
 	chunk->meta_data.is_free = 0;
+	printf("end\n");
 	return (chunk_get_data(chunk));
 }
 
@@ -94,9 +94,8 @@ int main() {
 	// Act
 	void	*tiny1 = ft_malloc(10); // Tiny Zone
 	void	*tiny2 = ft_malloc(10); // Tiny Zone
-	void	*tiny3 = ft_malloc(10); // Tiny Zone
-	void	*tiny4 = ft_malloc(10); // Tiny Zone
 
+	strcpy(tiny1, "Hello from the othersize, I want to tell you a milion time!");
 	print_heap();
 	return 0;
 }
