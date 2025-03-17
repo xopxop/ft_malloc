@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: esalorin <esalorin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 00:37:32 by dthan             #+#    #+#             */
-/*   Updated: 2025/03/17 11:08:17 by dthan            ###   ########.fr       */
+/*   Updated: 2025/03/17 07:52:21 by esalorin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 #include "helpers/formulars.h"
+
+
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 
 t_zone	*select_zone(size_t size)
 {
@@ -35,6 +40,7 @@ void	*ft_malloc(size_t size)
 	chunk = zone_find_free_chunk(zone, size);
 	if (!chunk)
 	{
+		printf("here\n");
 		block = zone_extend_new_block(zone, size);
 		if (!block) return (NULL);
 		chunk = block_find_free_chunk(block, size);
@@ -45,17 +51,52 @@ void	*ft_malloc(size_t size)
 	return (chunk_get_data(chunk));
 }
 
-#include <stdio.h>
+void 	print_chunk(t_chunk *chunks)
+{
+	int i = 0;
+	t_chunk *chunk;
+
+	chunk = chunks;
+	while (chunk)
+	{
+		printf("Chunk Address: %p\n", (void*)chunk);
+		i++;
+		chunk = chunk->next;
+	}
+	printf("index - %d\n", i);
+}
+
+void print_block(t_block *blocks)
+{
+	t_block *block;
+
+	block = blocks;
+	while (block)
+	{
+		printf("-----------------------\n");
+		printf("Block Address: %p\n", (void*)block);
+		print_chunk(block_get_first_chunk(block));
+		printf("-----------------------\n");
+		block = block->next;
+	}
+}
+
+void	print_heap()
+{
+	printf("TINY zone: \n");
+	print_block(g_heap.tiny.blocks);
+}
 
 // Testing the allocator
 int main() {
-	void	*ptr1 = ft_malloc(100); // Tiny Zone
-	void	*ptr2 = ft_malloc(2000); // Small Zone
-	void	*ptr3 = ft_malloc(10000); // Large Zone
+	print_heap();
 
-	printf("Allocated (Tiny): %p\n", ptr1);
-	printf("Allocated (Small): %p\n", ptr2);
-	printf("Allocated (Large): %p\n", ptr3);
+	// Act
+	void	*tiny1 = ft_malloc(10); // Tiny Zone
+	void	*tiny2 = ft_malloc(10); // Tiny Zone
+	void	*tiny3 = ft_malloc(10); // Tiny Zone
+	void	*tiny4 = ft_malloc(10); // Tiny Zone
 
+	print_heap();
 	return 0;
 }

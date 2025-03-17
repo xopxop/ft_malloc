@@ -3,7 +3,8 @@ TARGET := ft_malloc
 
 # Build command
 CC := clang
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS :=
+# CFLAGS := -Wall -Wextra -Werror
 DEBUG := -g
 
 # File structure

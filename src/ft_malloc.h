@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: esalorin <esalorin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 18:43:10 by dthan             #+#    #+#             */
-/*   Updated: 2025/03/16 15:15:36 by dthan            ###   ########.fr       */
+/*   Updated: 2025/03/17 07:38:17 by esalorin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,12 @@ typedef struct s_heap
 
 static t_heap g_heap = {
     .tiny = {
-        // .total_size = 0,
-        // .used_size = 0,
         .blocks = NULL
     },
     .small = {
-        // .total_size = 0,
-        // .used_size = 0,
         .blocks = NULL
     },
     .large = {
-        // .total_size = 0,
-        // .used_size = 0,
         .blocks = NULL
     }
 };

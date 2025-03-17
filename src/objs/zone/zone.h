@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zone.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: esalorin <esalorin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 12:11:15 by du.than           #+#    #+#             */
-/*   Updated: 2025/03/17 09:53:43 by dthan            ###   ########.fr       */
+/*   Updated: 2025/03/17 07:25:21 by esalorin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,8 @@
 #include "../block/block.h"
 #define TINY_ZONE_LIMIT_SIZE 
 
-enum e_zone
-{
-	TINY,
-	SMALL,
-	LARGE
-};
-
 typedef struct s_zone
 {
-	size_t limit_size;
 	struct s_block *blocks;
 }	t_zone;
 
