@@ -25,7 +25,7 @@ all: $(TARGET)
 
 # Build target
 $(TARGET): mkdir $(OBJ_FILES)
-	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(TARGET)
+	$(CC) $(CFLAGS) $(addprefix $(OBJ_DIR)/, $(notdir $(OBJ_FILES))) -o $(TARGET)
 
 # Create object directory
 mkdir:
