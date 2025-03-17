@@ -6,11 +6,13 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 10:35:54 by dthan             #+#    #+#             */
-/*   Updated: 2024/12/27 15:13:18 by dthan            ###   ########.fr       */
+/*   Updated: 2025/03/17 11:17:58 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-size_t align_size(size_t size, size_t alignment)
+#include <stddef.h>
+
+size_t aligned_data_size(size_t size, size_t alignment)
 {
     return (size + (alignment - 1)) & ~(alignment - 1);
 }

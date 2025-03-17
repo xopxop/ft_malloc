@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 12:53:06 by dthan             #+#    #+#             */
-/*   Updated: 2025/03/13 15:47:12 by dthan            ###   ########.fr       */
+/*   Updated: 2025/03/17 11:11:34 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ t_chunk	*zone_find_free_chunk(t_zone *zone, size_t size)
 	return (NULL);
 }
 
-t_block	*zone_extend_new_block(t_zone *zone)
+t_block	*zone_extend_new_block(t_zone *zone, size_t size)
 {
-	t_block	*new_block;
+	t_block	*block;
 
-	new_block = new_block();
-	if (!new_block)
-		return (NULL);
-	new_block->next = zone->blocks;
-	zone->blocks = new_block;
-	return (new_block);
+	block = new_block(size);
+	if (!block) return (NULL);
+	block->next = zone->blocks;
+	zone->blocks = block;
+	return (block);
 }

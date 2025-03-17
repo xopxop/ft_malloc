@@ -1,1 +1,0 @@
-getpagesize() -> 16384

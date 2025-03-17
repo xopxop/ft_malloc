@@ -21,7 +21,6 @@ SRC_FILES += $(SRC_DIR)/helpers/formulars.c
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
 all: $(TARGET)
-	@echo $(OBJ_FILES)
 	@echo "✅ Build completed!"
 
 # Build target
@@ -30,6 +29,7 @@ $(TARGET): mkdir $(OBJ_FILES)
 
 # Create object directory
 mkdir:
+	@echo $(OBJ_FILES)
 	@mkdir -p $(OBJ_DIR)
 
 # Compilation rule

@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 12:11:15 by du.than           #+#    #+#             */
-/*   Updated: 2025/03/13 15:55:01 by dthan            ###   ########.fr       */
+/*   Updated: 2025/03/17 09:53:43 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define ZONE_H
 #include "../block/block.h"
 #define TINY_ZONE_LIMIT_SIZE 
+
 enum e_zone
 {
 	TINY,
