@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esalorin <esalorin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 18:43:10 by dthan             #+#    #+#             */
-/*   Updated: 2025/03/17 07:38:17 by esalorin         ###   ########.fr       */
+/*   Updated: 2025/03/19 13:53:21 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ typedef struct s_heap
 // small zone has maximum chunk size of 512 bytes
 // the rest goes to large zone
 
-#define TINY_ZONE_MAX_CHUNK_SIZE 64
+#define TINY_ZONE_MAX_CHUNK_SIZE 128
 #define SMALL_ZONE_MAX_CHUNK_SIZE 512
 // defined alignment here according to 64 bytes machine?
-#define ALIGNMENT 16
+#define ALIGNMENT 4
 
 static t_heap g_heap = {
     .tiny = {

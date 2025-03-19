@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 00:37:32 by dthan             #+#    #+#             */
-/*   Updated: 2025/03/17 14:41:43 by dthan            ###   ########.fr       */
+/*   Updated: 2025/03/19 11:51:41 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,55 +47,53 @@ void	*ft_malloc(size_t size)
 	if (chunk->meta_data.data_size > size + aligned_chunk_data_size())
 		chunk_split(chunk, size);
 	chunk->meta_data.is_free = 0;
-	printf("end\n");
 	return (chunk_get_data(chunk));
 }
 
-void 	print_chunk(t_chunk *chunks)
-{
-	int i = 0;
-	t_chunk *chunk;
-
-	chunk = chunks;
-	while (chunk)
-	{
-		printf("Chunk Address: %p\n", (void*)chunk);
-		i++;
-		chunk = chunk->next;
-	}
-	printf("index - %d\n", i);
-}
-
-void print_block(t_block *blocks)
+size_t	show_alloc_mem_zone(t_zone zone)
 {
 	t_block *block;
+	t_chunk *chunk;
+	size_t total_size = 0;
 
-	block = blocks;
+	block = zone.blocks;
 	while (block)
 	{
-		printf("-----------------------\n");
-		printf("Block Address: %p\n", (void*)block);
-		print_chunk(block_get_first_chunk(block));
-		printf("-----------------------\n");
+		chunk = block_get_first_chunk(block);
+		while (chunk)
+		{
+			if (!chunk->meta_data.is_free)
+			{
+				printf("%p - %p : %zu bytes\n", (void*)chunk_get_data(chunk), (void*)chunk_get_data(chunk) + chunk->meta_data.data_size, chunk->meta_data.data_size);
+				total_size += chunk->meta_data.data_size;
+			}
+			chunk = chunk->next;
+		}
 		block = block->next;
 	}
+	return (total_size);
 }
 
-void	print_heap()
+void	show_alloc_mem()
 {
-	printf("TINY zone: \n");
-	print_block(g_heap.tiny.blocks);
+	size_t total_size = 0;
+
+	total_size = 0;
+	printf("TINY zone: %p\n", (void*)(g_heap.tiny.blocks));
+	total_size += show_alloc_mem_zone(g_heap.tiny);
+	printf("SMALL zone: %p\n", &(g_heap.small.blocks));
+	total_size += show_alloc_mem_zone(g_heap.small);
+	printf("LARGE zone: %p\n", &(g_heap.large.blocks));
+	total_size += show_alloc_mem_zone(g_heap.large);
+	printf("Total: %zu bytes\n", total_size);
 }
 
 // Testing the allocator
 int main() {
-	print_heap();
-
 	// Act
 	void	*tiny1 = ft_malloc(10); // Tiny Zone
-	void	*tiny2 = ft_malloc(10); // Tiny Zone
+	void	*tiny2 = ft_malloc(1); // Tiny Zone
 
-	strcpy(tiny1, "Hello from the othersize, I want to tell you a milion time!");
-	print_heap();
+	show_alloc_mem();
 	return 0;
 }

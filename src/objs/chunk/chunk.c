@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 20:10:19 by dthan             #+#    #+#             */
-/*   Updated: 2025/03/17 14:40:12 by dthan            ###   ########.fr       */
+/*   Updated: 2025/03/19 11:46:56 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,4 @@ void	chunk_split(t_chunk *chunk, size_t size)
 	splitted_chunk->next = chunk->next;
 	chunk->next = splitted_chunk;
 	chunk->meta_data.data_size = size;
-	// printf("SPLITTED CHUNK 1: address of chunk: %p, free: %d, data_size: %zu, next: %p\n", chunk, chunk->meta_data.is_free, chunk->meta_data.data_size, chunk->next);
-	// printf("SPLITTED CHUNK 2: address of chunk: %p\n", splitted_chunk);
 }

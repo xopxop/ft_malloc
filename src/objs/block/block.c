@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 04:03:31 by dthan             #+#    #+#             */
-/*   Updated: 2025/03/17 14:34:49 by dthan            ###   ########.fr       */
+/*   Updated: 2025/03/19 11:52:06 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,10 @@ t_chunk *block_find_free_chunk(t_block *block, size_t size)
 	chunk = block_get_first_chunk(block);
 	while (chunk)
 	{
-		printf("CHUNK: address of chunk: %p, free: %d, data_size: %zu, next: %p\n", chunk, chunk->meta_data.is_free, chunk->meta_data.data_size, chunk->next);
 		if (chunk->meta_data.is_free && chunk->meta_data.data_size >= size)
 			return (chunk);
 		chunk = chunk->next;
 	}
-	printf("RETURNED NULL\n");
 	return (NULL);
 }
 

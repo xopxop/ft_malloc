@@ -6,7 +6,7 @@
 /*   By: dthan <dthan@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 12:53:06 by dthan             #+#    #+#             */
-/*   Updated: 2025/03/17 14:30:40 by dthan            ###   ########.fr       */
+/*   Updated: 2025/03/19 11:37:37 by dthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ t_chunk	*zone_find_free_chunk(t_zone *zone, size_t size)
 	block = zone->blocks;
 	while (block)
 	{
-		printf("BLOCK: address of block: %p\n", block);
 		chunk = block_find_free_chunk(block, size);
-		printf("RETURNED CHUNK: address of chunk: %p\n", (void*)chunk);
 		if (chunk) {
 			return (chunk);
 		}
